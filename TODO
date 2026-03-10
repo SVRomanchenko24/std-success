@@ -1,0 +1,12 @@
+Main menu (Interface)
+New material (Interface, Text viewer)
+? Example tasks (Interface)
+Multiple-choice Tests (Interface)
+New material Backend (Provide text to frontend)
+? Example tasks Backend (Provide text to frontend)
+Tests generator (Backend)
+Account menu (Interface)
+Log in page (Interface)
+Register page (Interface)
+Credentials backend - TMSolodinov24
+Hashing (SHA256) - SVRomanchenko24
