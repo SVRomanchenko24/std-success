@@ -5,9 +5,9 @@
 
 #include <cstdint>
 #include <cstring>
-#include <cstdio>
-#include <iostream>
 #include <string>
+#include <iostream>
+#include <cstdio>
 #include "../include/sha256.h"
 
 using namespace std;
@@ -21,8 +21,8 @@ string dwordArrayToHex(uint32_t *array)
 	{
 		for (int b = 0; b<4; ++b)
 		{
-			ret += hex[(array[i]>>(8*(3-b)+4))&0x0F];
-			ret += hex[(array[i]>>(8*(3-b)))&0x0F];
+			ret += hex[(array[i]>>(8*(3-b)+4))&0x0F]; // first 4 bits
+			ret += hex[(array[i]>>(8*(3-b)))&0x0F]; // last 4 bits
 		}
 	}
 	return ret;
@@ -47,7 +47,7 @@ string hash_sha256(const char *input)
 
 	uint32_t k[64] = { 0x428a2f98, 0x71374491, 0xb5c0fbcf, 0xe9b5dba5, 0x3956c25b, 0x59f111f1, 0x923f82a4, 0xab1c5ed5, 0xd807aa98, 0x12835b01, 0x243185be, 0x550c7dc3, 0x72be5d74, 0x80deb1fe, 0x9bdc06a7, 0xc19bf174, 0xe49b69c1, 0xefbe4786, 0x0fc19dc6, 0x240ca1cc, 0x2de92c6f, 0x4a7484aa, 0x5cb0a9dc, 0x76f988da, 0x983e5152, 0xa831c66d, 0xb00327c8, 0xbf597fc7, 0xc6e00bf3, 0xd5a79147, 0x06ca6351, 0x14292967, 0x27b70a85, 0x2e1b2138, 0x4d2c6dfc, 0x53380d13, 0x650a7354, 0x766a0abb, 0x81c2c92e, 0x92722c85, 0xa2bfe8a1, 0xa81a664b, 0xc24b8b70, 0xc76c51a3, 0xd192e819, 0xd6990624, 0xf40e3585, 0x106aa070, 0x19a4c116, 0x1e376c08, 0x2748774c, 0x34b0bcb5, 0x391c0cb3, 0x4ed8aa4a, 0x5b9cca4f, 0x682e6ff3, 0x748f82ee, 0x78a5636f, 0x84c87814, 0x8cc70208, 0x90befffa, 0xa4506ceb, 0xbef9a3f7, 0xc67178f2 };
 
-	
+	// copy string to 8 bit array
 
 	for (int i = 0; i<l; ++i)
 		str[i] = input[i];
@@ -58,34 +58,23 @@ string hash_sha256(const char *input)
 	for (int i = l; i<(l/64+1)*64-8; ++i) // reserving 8 bytes for final length
 		str[i+1] += 0;
 
-	((uint64_t*)str)[(l/64+1)*8-1] = __builtin_bswap64(l*8);
-
-	// DEBUG: print block
-	
-	for (int i = 0; i<(l/64+1)*64; ++i)
-	{
-		printf("%.8b ", str[i]);
-		if (i%4==3) cout << endl;
-	}
-	cout << endl << endl;
+	((uint64_t*)str)[(l/64+1)*8-1] = SWAP_ENDIANNESS_64(l*8);
 
 	for (int b = 0; b<=(l/64); ++b)
 	{
 		// copy 512-bit block to w
 		for (int i = 0; i<16; ++i)
-			w[i] = (((uint32_t)str[b*64+i*4])<<24) | (((uint32_t)str[b*64+i*4+1])<<16) | (((uint32_t)str[b*64+i*4+2])<<8) | (str[b*64+i*4+3]);
+			w[i] = SWAP_ENDIANNESS_32(((uint32_t*)str)[i]);
 
 		// expand the words
 		for (int i = 16; i<64; ++i)
 		{
 			uint32_t s0 = RIGHTROTATE(w[i-15], 7) ^ RIGHTROTATE(w[i-15], 18) ^ (w[i-15]>>3);
 			uint32_t s1 = RIGHTROTATE(w[i-2], 17) ^ RIGHTROTATE(w[i-2], 19) ^ (w[i-2]>>10);
-			printf("\n\n%b\n%b", s0, s1);
 			w[i] = w[i-16] + s0 + w[i-7] + s1;
 		}
 
 		// init working variables
-
 		a = h0;
 		b = h1;
 		c = h2;
@@ -100,9 +89,9 @@ string hash_sha256(const char *input)
 		for (int i = 0; i<64; ++i)
 		{
 			uint32_t S1 = RIGHTROTATE(e, 6) ^ RIGHTROTATE(e, 11) ^ RIGHTROTATE(e, 25);
-			uint32_t ch = (e & f) ^ ((!e) & g);
+			uint32_t ch = (e & f) ^ ((~e) & g);
 			uint32_t temp1 = h + S1 + ch + k[i] + w[i];
-			uint32_t S0 = RIGHTROTATE(a, 2) ^ RIGHTROTATE(a, 13) ^ RIGHTROTATE(e, 22);
+			uint32_t S0 = RIGHTROTATE(a, 2) ^ RIGHTROTATE(a, 13) ^ RIGHTROTATE(a, 22);
 			uint32_t maj = (a & b) ^ (a & c) ^ (b & c);
 			uint32_t temp2 = S0 + maj;
 
