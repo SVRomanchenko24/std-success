@@ -9,4 +9,6 @@ Account menu (Interface)
 Log in page (Interface)
 Register page (Interface)
 Credentials backend - TMSolodinov24
-Hashing (SHA256) - SVRomanchenko24
+Hashing (SHA256) - SVRomanchenko24 (done, tested)
+UI library (TUI) - SVRomanchenko24 (done)
+Expression generation

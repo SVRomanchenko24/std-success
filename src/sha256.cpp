@@ -2,12 +2,9 @@
  *	SHA256 implementation from pseudocode from https://en.wikipedia.org/wiki/SHA-2#Pseudocode
 */ 
 
-
 #include <cstdint>
 #include <cstring>
 #include <string>
-#include <iostream>
-#include <cstdio>
 #include "../include/sha256.h"
 
 using namespace std;
@@ -15,7 +12,7 @@ using namespace std;
 string dwordArrayToHex(uint32_t *array)
 {
 	const char hex[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
-	string ret = "";
+	string ret;
 
 	for (int i = 0; i<8; ++i)
 	{
@@ -49,22 +46,22 @@ string hash_sha256(const char *input)
 
 	// copy string to 8 bit array
 
-	for (int i = 0; i<l; ++i)
+	for (uint64_t i = 0; i<l; ++i)
 		str[i] = input[i];
 
 	// pre-process string
 	str[l] = 0b10000000;
 
-	for (int i = l; i<(l/64+1)*64-8; ++i) // reserving 8 bytes for final length
-		str[i+1] += 0;
+	for (uint64_t i = l; i<(l/64+1)*64-8; ++i) // reserving 8 bytes for final length
+		str[i+1] = 0;
 
 	((uint64_t*)str)[(l/64+1)*8-1] = SWAP_ENDIANNESS_64(l*8);
 
-	for (int b = 0; b<=(l/64); ++b)
+	for (uint32_t t = 0; t<=((uint32_t)l/64); ++t)
 	{
 		// copy 512-bit block to w
 		for (int i = 0; i<16; ++i)
-			w[i] = SWAP_ENDIANNESS_32(((uint32_t*)str)[i]);
+			w[i] = SWAP_ENDIANNESS_32(((uint32_t*)str)[t*16+i]);
 
 		// expand the words
 		for (int i = 16; i<64; ++i)
