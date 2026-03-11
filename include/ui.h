@@ -3,6 +3,7 @@
 
 #include "defines.h"
 #include "keycodes.h"
+#include <cstdint>
 
 typedef uint8_t color_t;
 

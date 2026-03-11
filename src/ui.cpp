@@ -21,13 +21,6 @@ void term_init()
 
 	term_clear();
 
-	// set cursor to box
-
-	CONSOLE_CURSOR_INFO cursorInfo;
-	GetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-	cursorInfo.dwSize = 100;
-	SetConsoleCursorInfo(GetStdHandle(STD_OUTPUT_HANDLE), &cursorInfo);
-
 	// Initialise all color pairs to white text on black background (default)
 
 	for (uint8_t i = 0; i<16; ++i)
@@ -41,6 +34,7 @@ void term_deinit()
 {
 	term_resetColorPair();
 	term_clear();
+	term_setCursorVisibility(1);
 	term_moveCursor(0,0);
 }
 
@@ -117,8 +111,8 @@ void term_getTermSize(short& x, short& y)
 {
 	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
-	x = bufferInfo.srWindow.Right - bufferInfo.srWindow.Left+1;
-	y = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top+1;
+	x = bufferInfo.srWindow.Right - bufferInfo.srWindow.Left + 1;
+	y = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top;
 }
 
 void term_setCursorVisibility(bool visible)
