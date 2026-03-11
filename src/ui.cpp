@@ -13,11 +13,11 @@
 using namespace std;
 
 color_t colorPairs[2][16];
-uint8_t colorPairQuantity;
+uint8_t colorPairQuantity, currColorPair = 0;
 
 void term_init()
 {
-	colorPairQuantity = 0;
+	colorPairQuantity = 1;
 
 	term_clear();
 
@@ -99,11 +99,18 @@ void term_enableColorPair(uint8_t colorPairsIndex)
 	if (colorPairsIndex >= colorPairQuantity)
 		return;
 
+	currColorPair = colorPairsIndex;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorPairs[FOREGROUND_INDEX][colorPairsIndex] + (colorPairs[BACKGROUND_INDEX][colorPairsIndex]<<4));
+}
+
+void term_invertColorPair()
+{
+	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), colorPairs[BACKGROUND_INDEX][currColorPair] + (colorPairs[FOREGROUND_INDEX][currColorPair]<<4));
 }
 
 void term_resetColorPair()
 {
+	currColorPair = 0;
 	SetConsoleTextAttribute(GetStdHandle(STD_OUTPUT_HANDLE), WHITE + (BLACK<<4));
 }
 
