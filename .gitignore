@@ -1,3 +1,4 @@
 tests/sha256-test
 tests/sha256-test.exe
 main.exe
+.vs/
