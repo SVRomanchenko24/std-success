@@ -30,3 +30,28 @@ bool registerUser(string username, string password) {
     outFile.close();
     return true;
 }
+
+// Returns: 0 - Success, 1 - Error
+bool loginUser(string username, string inputPassword, int& task) {
+    ifstream inFile(getFileName(username));
+    if (!inFile.is_open()) return false;
+
+    string savedPassword;
+    if (!getline(inFile, savedPassword)) {
+        inFile.close();
+        return false;
+    }
+
+    // TODO: pass hash
+    if (inputPassword != savedPassword) {
+        inFile.close();
+        return false;
+    }
+
+    if (!(inFile >> task)) {
+        task = 1;
+    }
+
+    inFile.close();
+    return true;
+}
