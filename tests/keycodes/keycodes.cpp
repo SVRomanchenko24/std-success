@@ -1,7 +1,5 @@
 #include <iostream>
-#include "../include/ui.h"
-#include "../include/keycodes.h"
-#include "../include/defines.h"
+#include "../../include/ui.h"
 
 using namespace std;
 
