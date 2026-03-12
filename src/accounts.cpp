@@ -55,3 +55,14 @@ bool loginUser(string username, string inputPassword, int& task) {
     inFile.close();
     return true;
 }
+
+// Returns: 0 - Success, 1 - Error
+bool updateInfo(string username, string password, int task) {
+    ofstream outFile(getFileName(username));
+    if (!outFile.is_open()) return false;
+
+    outFile << password << "\n";
+    outFile << task << "\n";
+    outFile.close();
+    return true;
+}
