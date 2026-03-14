@@ -24,7 +24,7 @@ bool registerUser(string username, string password) {
     ofstream outFile(getFileName(username));
     if (!outFile.is_open()) return false;
 
-    // TODO: pass hash
+    password = hash_sha256(password);
     outFile << password << "\n";
     outFile << 1 << "\n";
     outFile.close();
@@ -42,7 +42,7 @@ bool loginUser(string username, string inputPassword, int& task) {
         return false;
     }
 
-    // TODO: pass hash
+    inputPassword = hash_sha256(password);
     if (inputPassword != savedPassword) {
         inFile.close();
         return false;
