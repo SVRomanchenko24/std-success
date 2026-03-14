@@ -1,8 +1,8 @@
 #include <iostream>
 #include <string>
 #include <fstream>
-
 #include "../include/accounts.h"
+#include "../include/sha256.h"
 
 using namespace std;
 
@@ -24,7 +24,7 @@ bool registerUser(string username, string password) {
     ofstream outFile(getFileName(username));
     if (!outFile.is_open()) return false;
 
-    password = hash_sha256(password);
+    password = hash_sha256(password.c_str());
     outFile << password << "\n";
     outFile << 1 << "\n";
     outFile.close();
@@ -42,7 +42,7 @@ bool loginUser(string username, string inputPassword, int& task) {
         return false;
     }
 
-    inputPassword = hash_sha256(password);
+    inputPassword = hash_sha256(inputPassword.c_str());
     if (inputPassword != savedPassword) {
         inFile.close();
         return false;
