@@ -43,13 +43,25 @@ void mainmenu()
 {
 	term_init();
 	cout << registerUser("test", "123123");
+	int selected = 0;
 	uint8_t in;
-
+	
+	drawMenu(selected);
 	while ((in = term_getch()) != CONTROL('C'))
 	{
 		switch (in)
 		{
+			case KEY_UP:
+				if (selected > 0)
+					selected--;
+				break;
+
+			case KEY_DOWN:
+				if (selected < MENU_SIZE - 1)
+					selected ++; 
+				break;
 		}
+drawMenu(selected);
 	}
 
 	term_deinit();
