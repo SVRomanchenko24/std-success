@@ -60,8 +60,36 @@ void mainmenu()
 				if (selected < MENU_SIZE - 1)
 					selected ++; 
 				break;
+			case KEY_ENTER:
+
+    switch (selected)
+    {
+        case 0:
+            term_clear();
+            cout << "Classwork section\n";
+            term_getch();
+            break;
+
+        case 1:
+            term_clear();
+            cout << "Homework not implemented yet\n";
+            term_getch();
+            break;
+
+        case 2:
+            term_clear();
+            showLeaderboard();
+            term_getch();
+            break;
+
+        case 3:
+            term_deinit();
+            return;
+   	 }
+   	 break;
 		}
-drawMenu(selected);
+
+		drawMenu(selected);
 	}
 
 	term_deinit();
