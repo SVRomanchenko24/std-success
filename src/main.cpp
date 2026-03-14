@@ -13,7 +13,21 @@ const char* menuItems[] =
 };
 
 const int MENU_SIZE = 4;
+void drawMenu(int selected)
+{
+    term_clear();
 
+    short width, height;
+    term_getTermSize(width, height);
+
+    int startY = height / 2 - MENU_SIZE / 2;
+
+    for (int i = 0; i < MENU_SIZE; i++)
+    {
+        term_moveCursor(width / 2 - 10, startY + i);
+        cout << menuItems[i];
+    }
+}
 void mainmenu()
 {
 	term_init();
