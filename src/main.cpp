@@ -13,6 +13,7 @@ const char* menuItems[] =
 };
 
 const int MENU_SIZE = 4;
+
 void drawMenu(int selected)
 {
     term_clear();
@@ -25,9 +26,19 @@ void drawMenu(int selected)
     for (int i = 0; i < MENU_SIZE; i++)
     {
         term_moveCursor(width / 2 - 10, startY + i);
-        cout << menuItems[i];
-    }
+        if (i == selected)
+{
+	term_inverted_ColorPair();
+	cout<< menuItems[i];
+	term_invertColorPair();
 }
+else
+{
+	cout<< menuItems[i];
+}
+}
+}
+
 void mainmenu()
 {
 	term_init();
