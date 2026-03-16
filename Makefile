@@ -14,3 +14,6 @@ keycodes:
 
 sha256:
 	g++ src/sha256.cpp tests/sha256/sha256test.cpp $(CXXFLAGS) -o tests/sha256-test
+
+generatetask:
+	g++ tests/generatetask/generatetask.cpp src/task.cpp src/utils.cpp $(CXXFLAGS) -o tests/generatetask-test
