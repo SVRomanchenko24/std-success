@@ -1,11 +1,14 @@
 #include <string>
+#include <vector>
 #include "../include/task.h"
 #include "../include/utils.h"
 
 const task taskList[] = {
 	// text												  lesson
-	{ "John had @ apples and lost @. How much he has left?", 1 }
+	{ "John had @ apples and lost @. How much he has left?", 0 }
 };
+
+const int nTasks = 1;
 
 string generateTask(int taskId, double solution)
 {
@@ -20,7 +23,7 @@ string generateTask(int taskId, double solution)
 	{
 		case 0: // example
 		{
-			while ((args[0] = RANDOM_DECIMAL(0, 100, 2))<solution);
+			while ((args[0] = RANDOM_POSITIVE(0, 100))<solution);
 			args[1] = args[0] - solution;
 			break;
 		}
@@ -36,4 +39,18 @@ string generateTask(int taskId, double solution)
 	}
 
 	return output;
+}
+
+vector<int> getTasksAtLevel(int level)
+{
+	vector<int> tasks;
+	for (size_t i = 0; i<nTasks; ++i)
+		if (taskList[i].topicId==level)
+			tasks.push_back(i);
+	return tasks;
+}
+
+string getRandomTaskAtLevel(int level, double solution)
+{
+	return generateTask(getTasksAtLevel(level)[getTasksAtLevel(level).size()!=0*RANDOM_POSITIVE(0, nTasks)], solution);
 }

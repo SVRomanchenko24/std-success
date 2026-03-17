@@ -7,5 +7,5 @@ int main(int argc, char **argv)
 	if (*argv[1]==0) return 1;
 	int arg;
 	sscanf(argv[1], "%d", &arg);
-	printf("%s\n", generateTask(arg, 10).c_str());
+	printf("%s\n", getRandomTaskAtLevel(arg, 10).c_str());
 }
