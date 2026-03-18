@@ -1,5 +1,7 @@
 #include <ctime>
 #include <random>
+#include <string>
+#include <vector>
 #include "../include/utils.h"
 
 using namespace std;
@@ -13,4 +15,20 @@ int _random()
 	srand(mt()^last_mask);
 	last_mask -= rand();
 	return rand();
+}
+
+vector<string> fitStringToWidth(string str, int width)
+{
+	vector<string> ret;
+	int currLine = 0;
+	for (size_t i = 0, lastNewLine = 0, lastSpace = 0; i<str.size(); ++i)
+	{
+		if (str[i]==' ') lastSpace = i;
+		if (i-lastNewLine>=width)
+		{
+			ret[currLine++] = str.substr(lastNewLine, lastSpace-lastNewLine);
+			lastNewLine = lastSpace + 1;
+		}
+	}
+	return ret;
 }

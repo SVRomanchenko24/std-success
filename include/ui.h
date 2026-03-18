@@ -18,5 +18,6 @@ void term_invertColorPair(); // Invert colors of the current color pair
 void term_resetColorPair(); // Set color pair to white text on black background
 void term_setCursorVisibility(bool visible); // Change cursor visibility (0 or 1)
 void term_getTermSize(short& x, short& y); // Get terminal size
+void term_printCentered(const char *text); // Print centered text
 
 #endif

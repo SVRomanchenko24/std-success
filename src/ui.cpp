@@ -3,6 +3,7 @@
 #include <windows.h>
 
 #include <cstdint>
+#include <cstring>
 #include <cstdarg>
 #include <iostream>
 
@@ -146,4 +147,12 @@ void term_clear()
 		cout << fullLine;
 	}
 	term_moveCursor(0,0);
+}
+
+void term_printCentered(const char *text)
+{
+	short maxx, maxy;
+	term_getTermSize(maxx, maxy);
+	term_moveCursor(maxy/2, maxx/2-strlen(text)/2);
+	cout << text;
 }
