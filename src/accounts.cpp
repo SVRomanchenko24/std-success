@@ -45,13 +45,15 @@ bool registerUser(string username, string password) {
     outFile << password << "\n";
     outFile << 1 << "\n";
     outFile << 0 << "\n";
+    outFile << false << "\n";
+    outFile << false << "\n";
     outFile.close();
 
     addToRegistry(username);
     return 0;
 }
 
-bool loginUser(string username, string inputPassword, int& task, int& avg) {
+bool loginUser(string username, string inputPassword, int& task, int& avg, bool& hw, bool& test) {
     ifstream inFile(getFileName(username));
     if (!inFile.is_open()) {
         return 1;
@@ -69,14 +71,24 @@ bool loginUser(string username, string inputPassword, int& task, int& avg) {
         return 1;
     }
 
-    if (!(inFile >> task)) task = 1;
-    if (!(inFile >> avg)) avg = 0;
+    if (!(inFile >> task)) {
+        task = 1;
+    }
+    if (!(inFile >> avg)) {
+        avg = 0;
+    }
+    if (!(inFile >> hw)) {
+        hw = 0;
+    }
+    if (!(inFile >> test)) {
+        test = 0;
+    }
 
     inFile.close();
     return 0;
 }
 
-bool updateInfo(string username, int task, int avg) {
+bool updateInfo(string username, int task, int avg, bool hw, bool test) {
     string savedPassword;
     ifstream inFile(getFileName(username));
     if (!inFile.is_open()) {
@@ -94,6 +106,8 @@ bool updateInfo(string username, int task, int avg) {
     outFile << savedPassword << "\n";
     outFile << task << "\n";
     outFile << avg << "\n";
+    outFile << hw << "\n";
+    outFile << test << "\n";
     outFile.close();
     return 0;
 }
