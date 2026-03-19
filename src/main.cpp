@@ -3,7 +3,10 @@
 #include "../include/leaderboard.h"
 #include "../include/ui.h"
 #include "../include/accounts.h"
+#include "../include/userdata.h"
+
 using namespace std;
+
 const char* menuItems[] = 
 {
           "1. Classwork",
@@ -27,22 +30,21 @@ void drawMenu(int selected)
     {
         term_moveCursor(width / 2 - 10, startY + i);
         if (i == selected)
-{
-	term_inverted_ColorPair();
-	cout<< menuItems[i];
-	term_invertColorPair();
-}
-else
-{
-	cout<< menuItems[i];
-}
-}
+		{
+			term_invertColorPair();
+			cout<< menuItems[i];
+			term_invertColorPair();
+		}
+		else
+		{
+			cout << menuItems[i];
+		}
+	}
 }
 
 void mainmenu()
 {
 	term_init();
-	cout << registerUser("test", "123123");
 	int selected = 0;
 	uint8_t in;
 	
@@ -61,32 +63,36 @@ void mainmenu()
 					selected ++; 
 				break;
 			case KEY_ENTER:
+				switch (selected)
+				{
+					case 0:
+						term_clear();
+						classwork(); // TODO implement viewer and backend
+						break;
 
-    switch (selected)
-    {
-        case 0:
-            term_clear();
-            cout << "Classwork section\n";
-            term_getch();
-            break;
+					case 1:
+						term_clear();
+						if (hasHomeworkPending)
+						{
+							int result = test("Homework", 3);
+							if (result==-1) break;
+							hasHomeworkPending = 0;
+							term_printCentered("Well done!");
+							break;
+						}
+						break;
 
-        case 1:
-            term_clear();
-            cout << "Homework not implemented yet\n";
-            term_getch();
-            break;
+					case 2:
+						term_clear();
+						showLeaderboard();
+						term_getch();
+						break;
 
-        case 2:
-            term_clear();
-            showLeaderboard();
-            term_getch();
-            break;
-
-        case 3:
-            term_deinit();
-            return;
-   	 }
-   	 break;
+					case 3:
+						term_deinit();
+						return;
+				 }
+				 break;
 		}
 
 		drawMenu(selected);
@@ -97,6 +103,7 @@ void mainmenu()
 
 int main()
 {
+	restoreSession();
 	mainmenu();
 	return 0;
 }

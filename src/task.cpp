@@ -4,10 +4,11 @@
 #include "../include/task.h"
 #include "../include/utils.h"
 #include "../include/ui.h"
+#include "../include/ui-common.h"
 
-const task taskList[] = {
-	// text												  lesson
-	{ "John had @ apples and lost @. How much he has left?", 0 }
+static task taskList[] = {
+	// text												lesson	canBeDecimal
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 }
 };
 
 const int nTasks = 1;
@@ -52,12 +53,18 @@ vector<int> getTasksAtLevel(int level)
 	return tasks;
 }
 
-string getRandomTaskAtLevel(int level, double solution)
+int getRandomTaskIdAtLevel(int level)
 {
-	return generateTask(getTasksAtLevel(level)[getTasksAtLevel(level).size()!=0*RANDOM_POSITIVE(0, nTasks)], solution);
+	vector<int> tasks = getTasksAtLevel(level);
+	return tasks[RANDOM(0, tasks.size())];
 }
 
-void drawTaskUI(int currTask, int totalTasks, string task, string solutions[4])
+bool solutionCanBeDecimal(int taskId)
+{
+	return taskList[taskId].canBeDecimal;
+}
+
+void drawTaskUI(int currTask, int totalTasks, string topic, string task, string solutions[4])
 {
 	term_clear();
 
@@ -65,7 +72,7 @@ void drawTaskUI(int currTask, int totalTasks, string task, string solutions[4])
 	term_getTermSize(x, y);
 
 	term_moveCursor(0,0);
-	cout << currTask << '/' << totalTasks;
+	cout << topic << ' ' << currTask << '/' << totalTasks;
 
 	vector<string> splitTaskText = fitStringToWidth(task, x-2);
 	for (size_t i = 0; i<splitTaskText.size() && i<y/2+2; ++i) // print task
@@ -84,16 +91,10 @@ void drawTaskUI(int currTask, int totalTasks, string task, string solutions[4])
 	}
 }
 
-bool drawExitWarning()
-{
-	term_printCentered("Current progress will not be saved, press Ctrl-C to proceed");
-	return term_getch()==CONTROL('C');
-}
-
-int taskUI(int currTask, int totalTasks, string task, string solutions[4])
+int taskUI(int currTask, int totalTasks, string topic, string task, string solutions[4])
 {
 	int selection = 0;
-	drawTaskUI(currTask, totalTasks, task, solutions, selection);
+	drawTaskUI(currTask, totalTasks, task, topic, solutions, selection);
 
 	uint8_t ch;
 	while ((ch = term_getch())!=KEY_ENTER)

@@ -67,3 +67,5 @@ bool updateInfo(string username, string password, int task, int avg) {
     outFile.close();
     return 0;
 }
+
+void restoreSession() // add login for last logged in user

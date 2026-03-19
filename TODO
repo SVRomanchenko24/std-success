@@ -1,14 +1,13 @@
 Main menu (Interface) - Daniil-zarubin (done)
 New material (Interface, Text viewer)
-? Example tasks (Interface)
 Multiple-choice Tests (Interface)
-New material Backend (Provide text to frontend)
-? Example tasks Backend (Provide text to frontend)
-Tests generator (Backend) - SVRomanchenko24
+New material Backend (Provide text to frontend) - TAsunaev24
+Tests generator (Backend) - SVRomanchenko24 (done)
 Account menu (Interface)
-Log in page (Interface)
-Register page (Interface)
+Log in page (Interface) - Daniil-zarubin
+Register page (Interface) - Daniil-zarubin
 Credentials backend - TMSolodinov24 (done)
 Hashing (SHA256) - SVRomanchenko24 (done, test available)
 UI library (TUI) - SVRomanchenko24 (done)
 Expression generation - SVRomanchenko24 (done, test available)
+Task content (Backend) - TAsunaev24

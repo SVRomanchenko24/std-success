@@ -8,10 +8,11 @@ using namespace std;
 typedef struct {
 	string task;
 	int topicId;
+	bool canBeDecimal;
 } task;
 
 string generateTask(int taskId, double solution);
-vector<int> getTaskAtLevel(int level);
-string getRandomTaskAtLevel(int level, double solution);
+vector<int> getTasksAtLevel(int level);
+int getRandomTaskIdAtLevel(int level);
 
 #endif
