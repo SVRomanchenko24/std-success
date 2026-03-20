@@ -5,6 +5,8 @@
 #include "../include/utils.h"
 #include "../include/ui.h"
 #include "../include/ui-common.h"
+#include "../include/keycodes.h"
+#include "../include/defines.h"
 
 static task taskList[] = {
 	// text												lesson	canBeDecimal
@@ -64,7 +66,7 @@ bool solutionCanBeDecimal(int taskId)
 	return taskList[taskId].canBeDecimal;
 }
 
-void drawTaskUI(int currTask, int totalTasks, string topic, string task, string solutions[4])
+void drawTaskUI(int currTask, int totalTasks, string topic, string task, string solutions[4], int selection)
 {
 	term_clear();
 
@@ -75,7 +77,7 @@ void drawTaskUI(int currTask, int totalTasks, string topic, string task, string 
 	cout << topic << ' ' << currTask << '/' << totalTasks;
 
 	vector<string> splitTaskText = fitStringToWidth(task, x-2);
-	for (size_t i = 0; i<splitTaskText.size() && i<y/2+2; ++i) // print task
+	for (size_t i = 0; i<splitTaskText.size() && i<(size_t)(y/2+2); ++i) // print task
 	{
 		term_moveCursor(1, i+1);
 		cout << splitTaskText[i];
@@ -94,7 +96,7 @@ void drawTaskUI(int currTask, int totalTasks, string topic, string task, string 
 int taskUI(int currTask, int totalTasks, string topic, string task, string solutions[4])
 {
 	int selection = 0;
-	drawTaskUI(currTask, totalTasks, task, topic, solutions, selection);
+	drawTaskUI(currTask, totalTasks, topic, task, solutions, selection);
 
 	uint8_t ch;
 	while ((ch = term_getch())!=KEY_ENTER)
@@ -128,7 +130,7 @@ int taskUI(int currTask, int totalTasks, string topic, string task, string solut
 			}
 			default: break;
 		}
-		drawTaskUI(currTask, totalTasks, task, solutions, selection);
+		drawTaskUI(currTask, totalTasks, topic, task, solutions, selection);
 	}
 
 	return selection;

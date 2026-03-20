@@ -17,7 +17,7 @@ int _random()
 	return rand();
 }
 
-vector<string> fitStringToWidth(string str, int width)
+vector<string> fitStringToWidth(string str, size_t width)
 {
 	vector<string> ret;
 	int currLine = 0;

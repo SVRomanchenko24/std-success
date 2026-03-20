@@ -3,6 +3,7 @@
 
 #define KEY_ESCAPE 27
 #define KEY_SPACE 32
+#define KEY_ENTER 13
 #define KEY_BACKSPACE 8
 
 // Multi-character keys, expressed as escape codes

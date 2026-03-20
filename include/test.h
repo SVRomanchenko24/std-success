@@ -1,6 +1,9 @@
 #ifndef TEST_H
 #define TEST_H
 
-int test();
+#include <string>
+using namespace std;
+
+int test(string type, int size);
 
 #endif

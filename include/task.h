@@ -14,5 +14,7 @@ typedef struct {
 string generateTask(int taskId, double solution);
 vector<int> getTasksAtLevel(int level);
 int getRandomTaskIdAtLevel(int level);
+int taskUI(int currTask, int totalTasks, string topic, string task, string solutions[4]);
+bool solutionCanBeDecimal(int taskId);
 
 #endif

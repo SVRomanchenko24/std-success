@@ -4,6 +4,7 @@
 #include <vector>
 #include "../include/accounts.h"
 #include "../include/sha256.h"
+#include "../include/userdata.h"
 
 using namespace std;
 
@@ -130,3 +131,5 @@ void loadLeaderboard(vector<string>& names, vector<int>& avgs) {
 }
 
 void restoreSession() // add login for last logged in user
+{
+}

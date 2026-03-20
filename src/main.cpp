@@ -4,6 +4,8 @@
 #include "../include/ui.h"
 #include "../include/accounts.h"
 #include "../include/userdata.h"
+#include "../include/keycodes.h"
+#include "../include/defines.h"
 
 using namespace std;
 
@@ -53,12 +55,12 @@ void mainmenu()
 	{
 		switch (in)
 		{
-			case KEY_UP:
+			case KEY_ARROW_UP:
 				if (selected > 0)
 					selected--;
 				break;
 
-			case KEY_DOWN:
+			case KEY_ARROW_DOWN:
 				if (selected < MENU_SIZE - 1)
 					selected ++; 
 				break;
@@ -84,7 +86,7 @@ void mainmenu()
 
 					case 2:
 						term_clear();
-						showLeaderboard();
+						leaderboard();
 						term_getch();
 						break;
 

@@ -31,7 +31,7 @@ int test(string type, int size)
 		for (int i = 0; i<4; ++i)
 		{
 			if (i==answerIndex) continue;
-			sprintf(buf, "%g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6, 2)));
+			sprintf(buf, "%g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
 			solutions[i] = buf;
 		}
 
