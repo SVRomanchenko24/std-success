@@ -86,6 +86,7 @@ bool loginUser(string username, string inputPassword, int& task, int& avg, bool&
     }
 
     inFile.close();
+    saveSession(username);
     return 0;
 }
 
@@ -110,6 +111,7 @@ bool updateInfo(string username, int task, int avg, bool hw, bool test) {
     outFile << hw << "\n";
     outFile << test << "\n";
     outFile.close();
+    saveSession(username);
     return 0;
 }
 
@@ -130,6 +132,40 @@ void loadLeaderboard(vector<string>& names, vector<int>& avgs) {
     }
 }
 
-void restoreSession() // add login for last logged in user
-{
+// Login for last logged in user 
+bool restoreSession(string& username, int& task, int& avg, bool& hw, bool& test) {
+    ifstream sessionFile("data/session.txt");
+    if (!sessionFile.is_open()) {
+        return 1;
+    }
+
+    if (!(sessionFile >> username)) {
+        sessionFile.close();
+        return 1;
+    }
+    sessionFile.close();
+
+    ifstream userFile(getFileName(username));
+    if (!userFile.is_open()) {
+        return 1;
+    }
+
+    string pass;
+    getline(userFile, pass);
+
+    if (!(userFile >> task)) {
+        task = 1;
+    }
+    if (!(userFile >> avg)) {
+        avg = 0;
+    }
+    if (!(userFile >> hw)) {
+        hw = false;
+    }
+    if (!(userFile >> test)) {
+        test = false;
+    }
+
+    userFile.close();
+    return 0;
 }
