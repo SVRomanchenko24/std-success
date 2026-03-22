@@ -2,7 +2,7 @@
 
 <p align="center">
 
-![std-success Logo](std-success/logo.png)
+![std-success Logo](tests/logo.png)
 
 </p>
 
@@ -57,4 +57,4 @@ The project is designed as a simple educational system to practice programming c
 
 ## License
 
-MIT License (or specify your own)
+MIT License std::success®
