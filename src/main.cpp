@@ -40,7 +40,7 @@ void drawMenu(int selected)
 			if (!hasTestPending||i)
 				cout << menuItems[i];
 			else cout << "1. Test";
-			term_invertColorPair();
+			term_resetColorPair();
 		}
 		else
 		{
@@ -135,12 +135,6 @@ int main(int argc, char **argv)
 {
 	loggedIn = !restoreSession(username, currTopic, currAvg, hasHomeworkPending, hasTestPending);
 
-	if (!loggedIn)
-	{
-		cout << "You are not logged in yet, use " << argv[0] << " login to log in or " << argv[0] << " reg to register\n";
-		return 0;
-	}
-
 	if (argc==2)
 	{
 		string userName, password;
@@ -214,6 +208,12 @@ int main(int argc, char **argv)
 			cout << "std-success help\n\treg - register an account\n\tlogin - log into an existing account\n\tlogout - log out of currently logged in account\n";
 			return 0;
 		}
+	}
+
+	if (!loggedIn)
+	{
+		cout << "You are not logged in yet, use " << argv[0] << " login to log in or " << argv[0] << " reg to register\n";
+		return 0;
 	}
 
 	if (argc>1)

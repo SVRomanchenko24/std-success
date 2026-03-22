@@ -10,14 +10,8 @@
 
 static task taskList[] = {
 	// text												lesson	canBeDecimal
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
-	{ "John had @ apples and lost @. How much he has left?", 0, 0 }
+	{ "Solve for y:\nx+@y-@=0\nx-@=0", 0, 0 }
+	{ "Solve for x:\nx+@=y\n@y-x=@", 0, 0 }
 };
 
 const int nTasks = 1;
@@ -33,13 +27,20 @@ string generateTask(int taskId, double solution)
 
 	switch (taskId)
 	{
-		case 0: // example
+		case 0:
 		{
-			while ((args[0] = RANDOM_POSITIVE(0, 100))<solution);
-			args[1] = args[0] - solution;
+			argv[0] = RANDOM_POSITIVE(0, 10);
+			argv[1] = RANDOM_POSITIVE(0, 10);
+			argv[2] = argv[1] - argv[0]*solution;
 			break;
 		}
-		default: exit(1);
+		case 1:
+		{
+			argv[0] = RANDOM_POSITIVE(0, 10);
+			argv[1] = RANDOM_POSITIVE(0, 10);
+			argv[2] = argv[0]*argv[1] + (argv[1]-1);
+			break;
+		}
 	}
 
 
