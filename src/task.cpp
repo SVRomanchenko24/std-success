@@ -8,12 +8,17 @@
 #include "../include/keycodes.h"
 #include "../include/defines.h"
 
-static task taskList[] = {
-	// text												lesson	canBeDecimal
-	{ "Solve for y:\nx+@y-@=0\nx-@=0", 0, 0 }
-	{ "Solve for x:\nx+@=y\n@y-x=@", 0, 0 }
+static Task taskList[] = {
+    // text                                                                                         lesson  canBeDecimal
+    { "Solve for x and y:\nx = 12 - y\nx + y = 30", 0, 0 },
+    { "Solve for x and y:\nx = 25 - y\nx + y = 40", 0, 0 },
+    { "Solve for x and y:\n3x + 2y = 20\nx - y = 2", 1, 0 },
+    { "Solve for x and y:\n5x + 4y = 50\n2x - 3y = 1", 1, 0 },
+    { "Solve for x and y:\ny = x^2 - 7\nx + y = 18", 2, 0 },
+    { "Solve for x and y:\ny = x^2 - 5\nx + y = 20", 2, 0 },
+    { "Solve the inequalities:\nx + 2y > 10\n3x - y <= 15", 3, 0 },
+    { "Solve the inequalities:\ny >= x^2 - 4\nx + y < 12", 4, 0 }
 };
-
 const int nTasks = 1;
 
 string generateTask(int taskId, double solution)
