@@ -7,9 +7,10 @@ using namespace std;
 
 string getFileName(string username);
 bool registerUser(string username, string password);
-bool loginUser(string username, string inputPassword, int& task);
+bool loginUser(string username, string inputPassword, int& task, double& avg, bool& hw, bool& test);
 bool updateInfo(string username, int task, double avg, bool hw, bool test);
 bool restoreSession(string& username, int& task, double& avg, bool& hw, bool& test);
+void logoutUser();
 
 extern int currTopic;
 extern bool hasHomeworkPending;

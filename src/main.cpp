@@ -1,4 +1,5 @@
 #include <iostream>
+#include <cstring>
 #include "../include/test.h"
 #include "../include/leaderboard.h"
 #include "../include/ui.h"
@@ -123,7 +124,94 @@ void mainmenu()
 int main(int argc, char **argv)
 {
 	loggedIn = !restoreSession(username, currTopic, currAvg, hasHomeworkPending, hasTestPending);
-	if (!loggedIn) return 1; //temp
+
+	if (!loggedIn)
+	{
+		cout << "You are not logged in yet, use " << argv[0] << " login to log in or " << argv[0] << " reg to register\n";
+		return 0;
+	}
+
+	if (argc==2)
+	{
+		string userName, password;
+		if (!strcmp(argv[1], "login"))
+		{
+			if (loggedIn)
+			{
+				cout << "You are already logged in, logout first.\n";
+				return 0;
+			}
+			else
+			{
+				cout << "Enter your username: ";
+				cin >> userName;
+				cout << "Enter your password: ";
+				cin >> password;
+				loggedIn = !loginUser(userName, password, currTopic, currAvg, hasHomeworkPending, hasTestPending);
+
+				if (!loggedIn)
+					cout << "Your have entered incorrect password or the account doesn't exist\n";
+				else
+					cout << "You have logged in successfully\n";
+
+				return 0;
+			}
+		}
+		else if (!strcmp(argv[1], "reg"))
+		{
+			if (loggedIn)
+			{
+				cout << "You are already logged in, logout first.\n";
+				return 0;
+			}
+			else
+			{
+				cout << "Your username can only contain letters and numbers.\nEnter your username: ";
+				cin >> userName;
+				cin.ignore(100);
+				cout << "Your password can only contain letters, numbers and special characters such as #, !. It also has to contain at least 6 charachers\nEnter your password: ";
+				char ch;
+				while ((ch = term_getch())!=KEY_ENTER&&password.size()<6)
+				{
+					if ((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>='0'&&ch<='9')||ch=='#'||ch=='!')
+						password.push_back(ch);
+					else if (ch==KEY_BACKSPACE)
+						password.pop_back();
+				}
+				if (registerUser(userName, password))
+					cout << "The user with that name already exists.\n";
+				else
+					cout << "You have registered successfully! Use " << argv[0] << " login to log in with your new account.\n";
+				return 0;
+			}
+		}
+		else if (!strcmp(argv[1], "logout"))
+		{
+			if (!loggedIn)
+			{
+				cout << "You are not logged in yet.\n";
+				return 0;
+			}
+			else
+			{
+				logoutUser();
+				cout << "You have logged out successfully!\n";
+				return 0;
+			}
+		}
+		else if (!strcmp(argv[1], "help"))
+		{
+			cout << "std-success help\n\treg - register an account\n\tlogin - log into an existing account\n\tlogout - log out of currently logged in account\n";
+			return 0;
+		}
+	}
+
+	if (argc>1)
+	{
+		cout << "Invalid arguments. Use " << argv[0] << " help to get help.\n";
+		return 0;
+	}
+
 	mainmenu();
 	return 0;
 }

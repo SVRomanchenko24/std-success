@@ -5,7 +5,6 @@
 #include "../include/accounts.h"
 #include "../include/sha256.h"
 
-string userName;
 int currTopic;
 bool hasHomeworkPending;
 bool hasTestPending;
@@ -14,36 +13,36 @@ bool loggedIn;
 
 using namespace std;
 
-string getFileName(string userName) {
-    return "accounts/" + userName + ".txt";
+string getFileName(string username) {
+    return "accounts/" + username + ".txt";
 }
 
-void saveSession(string userName) {
+void saveSession(string username) {
     ofstream sessionFile("data/session.txt");
     if (sessionFile.is_open()) {
-        sessionFile << userName;
+        sessionFile << username;
         sessionFile.close();
     }
 }
 
-void addToRegistry(string userName) {
+void addToRegistry(string username) {
     ofstream users("data/users.txt", ios::app);
     if (users.is_open()) {
-        users << userName << "\n";
+        users << username << "\n";
     }
 }
 
-bool userExists(string userName) {
-    ifstream f(getFileName(userName));
+bool userExists(string username) {
+    ifstream f(getFileName(username));
     return f.good();
 }
 
-bool registerUser(string userName, string password) {
-    if (userExists(userName)) {
+bool registerUser(string username, string password) {
+    if (userExists(username)) {
         return 1;
     }
 
-    ofstream outFile(getFileName(userName));
+    ofstream outFile(getFileName(username));
     if (!outFile.is_open()) {
         return 1;
     }
@@ -56,12 +55,11 @@ bool registerUser(string userName, string password) {
     outFile << false << "\n";
     outFile.close();
 
-    addToRegistry(userName);
+    addToRegistry(username);
     return 0;
 }
-
-bool loginUser(string userName, string inputPassword, int& task, int& avg, bool& hw, bool& test) {
-    ifstream inFile(getFileName(userName));
+bool loginUser(string username, string inputPassword, int& task, double& avg, bool& hw, bool& test) {
+    ifstream inFile(getFileName(username));
     if (!inFile.is_open()) {
         return 1;
     }
@@ -92,13 +90,13 @@ bool loginUser(string userName, string inputPassword, int& task, int& avg, bool&
     }
 
     inFile.close();
-    saveSession(userName);
+    saveSession(username);
     return 0;
 }
 
-bool updateInfo(string userName, int task, double avg, bool hw, bool test) {
+bool updateInfo(string username, int task, double avg, bool hw, bool test) {
     string savedPassword;
-    ifstream inFile(getFileName(userName));
+    ifstream inFile(getFileName(username));
     if (!inFile.is_open()) {
         return 1;
     }
@@ -106,7 +104,7 @@ bool updateInfo(string userName, int task, double avg, bool hw, bool test) {
     getline(inFile, savedPassword);
     inFile.close();
 
-    ofstream outFile(getFileName(userName));
+    ofstream outFile(getFileName(username));
     if (!outFile.is_open()) {
         return 1;
     }
@@ -117,7 +115,7 @@ bool updateInfo(string userName, int task, double avg, bool hw, bool test) {
     outFile << hw << "\n";
     outFile << test << "\n";
     outFile.close();
-    saveSession(userName);
+    saveSession(username);
     return 0;
 }
 
@@ -139,19 +137,19 @@ void loadLeaderboard(vector<string>& names, vector<int>& avgs) {
 }
 
 // Login for last logged in user 
-bool restoreSession(string& userName, int& task, double& avg, bool& hw, bool& test) {
+bool restoreSession(string& username, int& task, double& avg, bool& hw, bool& test) {
     ifstream sessionFile("data/session.txt");
     if (!sessionFile.is_open()) {
         return 1;
     }
 
-    if (!(sessionFile >> userName)) {
+    if (!(sessionFile >> username)) {
         sessionFile.close();
         return 1;
     }
     sessionFile.close();
 
-    ifstream userFile(getFileName(userName));
+    ifstream userFile(getFileName(username));
     if (!userFile.is_open()) {
         return 1;
     }
@@ -174,4 +172,10 @@ bool restoreSession(string& userName, int& task, double& avg, bool& hw, bool& te
 
     userFile.close();
     return 0;
+}
+
+void logoutUser()
+{
+	ofstream sessionFile("data/session.txt");
+	sessionFile.close();
 }
