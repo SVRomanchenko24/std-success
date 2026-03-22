@@ -1,23 +1,35 @@
+# 
+
+<p align="center">
+
+![std-success Logo](assets/logo.png)
+
+</p>
+
 # std-success
 
-std-success is a console-based C++ application for learning mathematics. It provides theoretical material, practical tasks, tests, and a basic local account system with performance tracking.
+**Console-based C++ application for learning mathematics**  
+
+---
 
 ## Features
 
-- Theoretical material  
+- **Theoretical material**  
   Text-based explanations of school-level mathematics topics, with optional examples.
 
-- Tasks  
+- **Tasks**  
   Practice exercises divided into classwork and homework, with answer validation.
 
-- Tests  
+- **Tests**  
   Generated from tasks and theory questions, with automatic scoring.
 
-- Account system  
+- **Account system**  
   Local user registration and login with individual progress tracking.
 
-- Leaderboard  
+- **Leaderboard**  
   Ranking of users based on their results and average scores.
+
+---
 
 ## Technologies
 
@@ -26,17 +38,23 @@ std-success is a console-based C++ application for learning mathematics. It prov
 - File-based data storage  
 - Console interface
 
+---
+
 ## Project Structure
 
-- /src — source files  
-- /include — header files  
-- /data — user data and results  
-- main.cpp — entry point  
+- `/src` — source files  
+- `/include` — header files  
+- `/data` — user data and results  
+- `main.cpp` — entry point  
+
+---
 
 ## Purpose
 
 The project is designed as a simple educational system to practice programming concepts and implement core features of a learning platform in a console environment.
 
+---
+
 ## License
 
-MIT License std-succes®
+MIT License (or specify your own)
