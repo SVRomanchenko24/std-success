@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cmath>
 #include "../include/task.h"
 #include "../include/utils.h"
 #include "../include/ui.h"
@@ -15,10 +16,9 @@ static task taskList[] = {
     { "Solve for y:\nx = 2y - @\nx + y = @", 0, 0 },
     { "Solve for x:\n@x + y = 2\nx - y = @", 1, 0 },
     { "Solve for y:\nx + @y = 5\n2x - 3y = @", 1, 0 },
-    { "Solve for x:\n@x + 2y = @\n3x - y = @", 1, 0 },
+    { "Solve for x:\n@x + 2y = 0\n3x - y = @", 1, 0 },
     { "Solve for y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve for y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve for x:\ny = x^2 - @\nx + y = @", 2, 0 },
+    { "Solve for x:\n@y = x^2 + 1\nx + y = @", 2, 0 },
     { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
     { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
     { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
@@ -31,7 +31,7 @@ static task taskList[] = {
     { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
     { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 }
 };
-const int nTasks = 20;
+const int nTasks = 19;
 
 string generateTask(int taskId, double solution)
 {
@@ -61,6 +61,24 @@ string generateTask(int taskId, double solution)
 		{
 			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = solution*3-args[0];
+			break;
+		}
+		case 3:
+		{
+			args[0] = RANDOM_POSITIVE(0, 10);
+			args[1] = solution+2-argv[0]*solution;
+			break;
+		}
+		case 4:
+		{
+			args[0] = RANDOM_POSITIVE(0, 10);
+			args[1] = 2*(5-args[0]*solution)-3*solution;
+			break;
+		}
+		case 5:
+		{
+			args[0] = RANDOM_POSITIVE(0, 10);
+			args[1] = solution(6+args[0])/2;
 			break;
 		}
 	}
