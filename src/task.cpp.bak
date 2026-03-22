@@ -1,6 +1,7 @@
 #include <string>
 #include <vector>
 #include <iostream>
+#include <cstdio>
 #include "../include/task.h"
 #include "../include/utils.h"
 #include "../include/ui.h"
@@ -9,34 +10,22 @@
 #include "../include/defines.h"
 
 static task taskList[] = {
-    // text                           lesson  canBeDecimal
+    // text                                                                                         lesson  canBeDecimal
     { "Solve for y:\nx = @ - y\nx + 3y = @", 0, 0 },
     { "Solve for x:\n2x - @ = y\nx - y = @", 0, 0 },
-    { "Solve for y:\nx = 2y - @\nx + y = @", 0, 0 },
-    { "Solve for x:\n@x + y = 2\nx - y = @", 1, 0 },
-    { "Solve for y:\nx + @y = 5\n2x - 3y = @", 1, 0 },
-    { "Solve for x:\n@x + 2y = @\n3x - y = @", 1, 0 },
-    { "Solve for y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve for y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve for x:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
-    { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
-    { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
-    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
-    { "Solve for x and y:\n@x + @y = @\n2x - 3y = @", 1, 0 },
-    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 }
+    { "Solve for y:\n3x + 2y = 20\nx - y = 2", 1, 0 },
+    { "Solve for x:\n5x + 4y = 50\n2x - 3y = 1", 1, 0 },
+    { "Solve for y:\ny = x^2 - 7\nx + y = 18", 2, 0 },
+    { "Solve for x:\ny = x^2 - 5\nx + y = 20", 2, 0 },
+    { "Solve the inequalities:\nx + 2y > 10\n3x - y <= 15", 3, 0 },
+    { "Solve the inequalities:\ny >= x^2 - 4\nx + y < 12", 4, 0 }
 };
-const int nTasks = 20;
+const int nTasks = 1;
 
 string generateTask(int taskId, double solution)
 {
-	cout << taskId;
 	string output = taskList[taskId].task;
+	cout << taskId;
 
 	int nArgs = 0;
 	for (size_t i = 0; i<output.size(); ++i) nArgs += (output[i]=='@');
@@ -57,22 +46,17 @@ string generateTask(int taskId, double solution)
 			args[1] = args[0]-solution;
 			break;
 		}
-		case 2:
-		{
-			args[0] = RANDOM_POSITIVE(0, 10);
-			args[1] = solution*3-args[0];
-			break;
-		}
+		// default: exit(0);
 	}
 
-	char buf[20];
+	char buf[10];
 
 	for (int i = 0, currArg = 0; currArg<nArgs; ++i, ++currArg)
 	{
 		i = output.find("@", i);
 		if (i==-1) break;
 		sprintf(buf, "%g", args[currArg]);
-		output.replace(i, 1, buf);
+		output.replace(i, 1, to_string(args[currArg]));
 	}
 
 	return output;
@@ -81,9 +65,14 @@ string generateTask(int taskId, double solution)
 vector<int> getTasksAtLevel(int level)
 {
 	vector<int> tasks;
-	for (size_t i = 0; i<nTasks; ++i)
+	for (size_t i = 0; i<=nTasks; ++i)
+	{
 		if (taskList[i].topicId==level)
+		{
 			tasks.push_back(i);
+			cout << i;
+		}
+	}
 	return tasks;
 }
 

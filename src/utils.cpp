@@ -24,6 +24,11 @@ vector<string> fitStringToWidth(string str, size_t width)
 	for (size_t i = 0, lastNewLine = 0, lastSpace = 0; i<str.size(); ++i)
 	{
 		if (str[i]==' ') lastSpace = i;
+		else if (str[i]=='\n')
+		{
+			ret[currLine++] = str.substr(lastNewLine, i-lastNewLine-1);
+			lastNewLine = i + 1;
+		}
 		if (i-lastNewLine>=width)
 		{
 			ret[currLine++] = str.substr(lastNewLine, lastSpace-lastNewLine);
