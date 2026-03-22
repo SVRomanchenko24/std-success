@@ -1,7 +1,7 @@
 # For cross-compilation from Linux
 
 CROSSCXX := x86_64-w64-mingw32-g++ 
-CXXFLAGS := -Wall -Werror -static -lucrt -D_UCRT -O2
+CXXFLAGS := -Wall -Werror -lucrt -D_UCRT -O2
 SOURCEFILES := src/main.cpp src/ui.cpp src/sha256.cpp src/test.cpp src/task.cpp src/utils.cpp src/accounts.cpp src/ui-common.cpp src/classwork.cpp src/leaderboard.cpp
 
 main:

@@ -17,4 +17,6 @@ int getRandomTaskIdAtLevel(int level);
 int taskUI(int currTask, int totalTasks, string topic, string task, string solutions[4]);
 bool solutionCanBeDecimal(int taskId);
 
+extern double ineq_max, ineq_min;
+
 #endif

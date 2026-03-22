@@ -23,7 +23,34 @@ int test(string type, int size)
 
 		task = generateTask(taskId, solution);
 
-		sprintf(buf, "%g", solution);
+		if (currTopic!=2) // not ineq
+			sprintf(buf, "%g", solution);
+		else
+		{
+			switch (taskId)
+			{
+				case 8:
+				{
+					sprintf(buf, "(%g;%g)", ineq_min, ineq_max);
+					break;
+				}
+				case 9:
+				{
+					sprintf(buf, "(%g;%g]", ineq_min, ineq_max);
+					break;
+				}
+				case 10:
+				{
+					sprintf(buf, "(%g;+inf)", ineq_min);
+					break;
+				}
+				case 11:
+				{
+					sprintf(buf, "(%g;%g]", ineq_min, ineq_max);
+					break;
+				}
+			}
+		}
 
 		int answerIndex = RANDOM(0, 4);
 		solutions[answerIndex] = buf;
@@ -31,7 +58,34 @@ int test(string type, int size)
 		for (int i = 0; i<4; ++i)
 		{
 			if (i==answerIndex) continue;
-			sprintf(buf, "%g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
+			if (currTopic!=2) // not ineq
+				sprintf(buf, "%g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
+			else
+			{
+				switch (taskId)
+				{
+					case 8:
+					{
+						sprintf(buf, "(%g;%g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						break;
+					}
+					case 9:
+					{
+						sprintf(buf, "(%g;%g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						break;
+					}
+					case 10:
+					{
+						sprintf(buf, "(%g;+inf)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2));
+						break;
+					}
+					case 11:
+					{
+						sprintf(buf, "(%g;%g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						break;
+					}
+				}
+			}
 			solutions[i] = buf;
 		}
 

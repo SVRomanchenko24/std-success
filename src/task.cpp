@@ -14,17 +14,18 @@ static task taskList[] = {
     { "Solve for y:\nx = @ - y\nx + 3y = @", 0, 0 },
     { "Solve for x:\n2x - @ = y\nx - y = @", 0, 0 },
     { "Solve for y:\nx = 2y - @\nx + y = @", 0, 0 },
+    { "Solve for x:\nx + y = @ - 2y\n2x - 3y = @", 0, 0 },
+    { "Solve for x:\n@x - y = 1\nx + y = @", 1, 0 },
     { "Solve for x:\n@x + y = 2\nx - y = @", 1, 0 },
     { "Solve for y:\nx + @y = 5\n2x - 3y = @", 1, 0 },
     { "Solve for x:\n@x + 2y = 0\n3x - y = @", 1, 0 },
-    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
-    { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
-    { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
-    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
-    { "Solve for x and y:\n@x + @y = @\n2x - 3y = @", 1, 0 },
-    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
+    { "Which one is the solution for:\nx > 1 - @x\nx < @", 2, 1 },
+    { "Which one is the solution for:\nx > @ - 2x\n3x + 3<= @", 2, 1 },
+    { "Which one is the solution for:\n2x > @ - x\n@x > 8", 2, 1 },
+    { "Which one is the solution for:\n@x > 5\n3x <= @ + 2x", 2, 1 }
 };
-const int nTasks = 19;
+const int nTasks = 12;
+double ineq_max, ineq_min;
 
 string generateTask(int taskId, double solution)
 {
@@ -59,19 +60,48 @@ string generateTask(int taskId, double solution)
 		case 3:
 		{
 			args[0] = RANDOM_POSITIVE(0, 10);
-			args[1] = solution+2-argv[0]*solution;
+			args[1] = 2*solution-(args[0]-solution);
 			break;
-		}
+		} // begin 1
 		case 4:
 		{
+			//	x: @x-y=1;x+y=@", 1, 0 },
 			args[0] = RANDOM_POSITIVE(0, 10);
-			args[1] = 2*(5-args[0]*solution)-3*solution;
+			args[1] = solution+(args[0]*solution-1);
 			break;
 		}
 		case 5:
 		{
 			args[0] = RANDOM_POSITIVE(0, 10);
-			args[1] = solution(6+args[0])/2;
+			args[1] = solution+2-args[0]*solution;
+			break;
+		}
+		case 6:
+		{
+			args[0] = RANDOM_POSITIVE(0, 10);
+			args[1] = 2*(5-args[0]*solution)-3*solution;
+			break;
+		}
+		case 7:
+		{
+			args[0] = RANDOM_POSITIVE(0, 10);
+			args[1] = solution*(6+args[0])/2;
+			break;
+		}
+		case 8:
+		{
+			break;
+		}
+		case 9:
+		{
+			break;
+		}
+		case 10:
+		{
+			break;
+		}
+		case 11:
+		{
 			break;
 		}
 	}
