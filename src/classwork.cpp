@@ -13,7 +13,6 @@ string theory[] = {
 	"You align the equations and add them together so that one variable (like x or −x) equals zero,\n\t allowing you to solve for the remaining variable immediately.",
 	"To solve these, you substitute the linear equation into the quadratic one, creating a single \n\t quadratic equation (ax2+bx+c=0) that you solve using factoring or \n\t the quadratic formula.",
 	"To solve a system of inequalities, you graph each line separately and find the overlapping shaded \n\t area (the intersection) that satisfies every inequality in \n\t the set.",
-	"The solution to a second-degree system is the shared shaded region on a graph where the points satisfy \n\t both the curved boundary (quadratic) and any other  \n\t boundaries (linear or quadratic) simultaneously."
 };
 
 int classwork()
