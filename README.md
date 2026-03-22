@@ -2,7 +2,7 @@
 
 <p align="center">
 
-![std-success Logo](assets/logo.png)
+![std-success Logo](main/logo.png)
 
 </p>
 
