@@ -20,12 +20,9 @@ static task taskList[] = {
     { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
     { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
     { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
     { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
     { "Solve for x and y:\n@x + @y = @\n2x - 3y = @", 1, 0 },
-    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
     { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
-    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 }
 };
 const int nTasks = 19;
 
