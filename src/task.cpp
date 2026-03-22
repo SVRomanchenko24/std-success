@@ -10,14 +10,26 @@
 
 static Task taskList[] = {
     // text                                                                                         lesson  canBeDecimal
-    { "Solve for x and y:\nx = 12 - y\nx + y = 30", 0, 0 },
-    { "Solve for x and y:\nx = 25 - y\nx + y = 40", 0, 0 },
-    { "Solve for x and y:\n3x + 2y = 20\nx - y = 2", 1, 0 },
-    { "Solve for x and y:\n5x + 4y = 50\n2x - 3y = 1", 1, 0 },
-    { "Solve for x and y:\ny = x^2 - 7\nx + y = 18", 2, 0 },
-    { "Solve for x and y:\ny = x^2 - 5\nx + y = 20", 2, 0 },
-    { "Solve the inequalities:\nx + 2y > 10\n3x - y <= 15", 3, 0 },
-    { "Solve the inequalities:\ny >= x^2 - 4\nx + y < 12", 4, 0 }
+    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
+    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
+    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
+    { "Solve for x and y:\n@x + @y = @\nx - y = @", 1, 0 },
+    { "Solve for x and y:\n@x + @y = @\n2x - 3y = @", 1, 0 },
+    { "Solve for x and y:\n@x + 2y = @\n3x - y = @", 1, 0 },
+    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
+    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
+    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
+    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
+    { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
+    { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
+    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
+    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
+    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 },
+    { "Solve for x and y:\nx = @ - y\nx + y = @", 0, 0 },
+    { "Solve for x and y:\n@x + @y = @\n2x - 3y = @", 1, 0 },
+    { "Solve for x and y:\ny = x^2 - @\nx + y = @", 2, 0 },
+    { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
+    { "Solve the inequalities:\ny >= x^2 - @\nx + y < @", 4, 0 }
 };
 const int nTasks = 1;
 
