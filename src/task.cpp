@@ -17,8 +17,6 @@ static task taskList[] = {
     { "Solve for x:\n@x + y = 2\nx - y = @", 1, 0 },
     { "Solve for y:\nx + @y = 5\n2x - 3y = @", 1, 0 },
     { "Solve for x:\n@x + 2y = 0\n3x - y = @", 1, 0 },
-    { "Solve for y:\ny = x^2 - @\nx + y = @", 2, 0 },
-    { "Solve for x:\n@y = x^2 + 1\nx + y = @", 2, 0 },
     { "Solve the inequalities:\nx + @y > @\n@x - y <= @", 3, 0 },
     { "Solve the inequalities:\nx + 2y > @\n3x - y <= @", 3, 0 },
     { "Solve the inequalities:\n@x + @y >= @\nx - y < @", 3, 0 },
