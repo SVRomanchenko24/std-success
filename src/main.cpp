@@ -75,7 +75,11 @@ void mainmenu()
 				{
 					case 0:
 						term_clear();
-						if (!hasTestPending) classwork(); // TODO implement viewer and backend
+						if (!hasTestPending)
+						{
+							classwork();
+							updateInfo(username, currTopic, currAvg, hasHomeworkPending, hasTestPending);
+						}
 						else
 						{
 							int result = test("Test", 10);
@@ -98,9 +102,15 @@ void mainmenu()
 							int result = test("Homework", 3);
 							if (result==-1) break;
 							hasHomeworkPending = 0;
+							hasTestPending = 1;
 							term_printCentered("Well done!");
+							updateInfo(username, currTopic, currAvg, hasHomeworkPending, hasTestPending);
 							term_getch();
-							break;
+						}
+						else
+						{
+							term_printCentered("You have no pending homework");
+							term_getch();
 						}
 						break;
 					case 2:

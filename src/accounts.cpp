@@ -77,7 +77,7 @@ bool loginUser(string username, string inputPassword, int& task, double& avg, bo
     }
 
     if (!(inFile >> task)) {
-        task = 1;
+        task = 0;
     }
     if (!(inFile >> avg)) {
         avg = 0;
@@ -119,7 +119,7 @@ bool updateInfo(string username, int task, double avg, bool hw, bool test) {
     return 0;
 }
 
-void loadLeaderboard(vector<string>& names, vector<int>& avgs) {
+void loadLeaderboard(vector<string>& names, vector<double>& avgs) {
     ifstream users("data/users.txt");
     string currentName;
 
@@ -127,7 +127,8 @@ void loadLeaderboard(vector<string>& names, vector<int>& avgs) {
         if (currentName.empty()) continue;
         ifstream userFile(getFileName(currentName));
         string pass;
-        int task, avg;
+        int task;
+		double avg;
 
         if (getline(userFile, pass) && userFile >> task && userFile >> avg) {
             names.push_back(currentName);

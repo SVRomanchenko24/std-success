@@ -10,6 +10,13 @@
 
 static task taskList[] = {
 	// text												lesson	canBeDecimal
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
+	{ "John had @ apples and lost @. How much he has left?", 0, 0 },
 	{ "John had @ apples and lost @. How much he has left?", 0, 0 }
 };
 

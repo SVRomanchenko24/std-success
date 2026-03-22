@@ -2,6 +2,7 @@
 #define ACCOUNTS_H
 
 #include <string>
+#include <vector>
 
 using namespace std;
 
@@ -10,6 +11,7 @@ bool registerUser(string username, string password);
 bool loginUser(string username, string inputPassword, int& task, double& avg, bool& hw, bool& test);
 bool updateInfo(string username, int task, double avg, bool hw, bool test);
 bool restoreSession(string& username, int& task, double& avg, bool& hw, bool& test);
+void loadLeaderboard(vector<string>& names, vector<double>& avgs);
 void logoutUser();
 
 extern int currTopic;
