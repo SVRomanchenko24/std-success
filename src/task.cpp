@@ -170,7 +170,7 @@ void drawTaskUI(int currTask, int totalTasks, string topic, string task, string 
 
 		if (i==selection) term_invertColorPair();
 		cout << solutions[i];
-		if (i==selection) term_invertColorPair();
+		if (i==selection) term_resetColorPair();
 	}
 }
 
