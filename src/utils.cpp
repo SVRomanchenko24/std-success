@@ -21,13 +21,15 @@ vector<string> fitStringToWidth(string str, size_t width)
 {
 	vector<string> ret;
 	int currLine = 0;
-	for (size_t i = 0, lastNewLine = 0, lastSpace = 0; i<str.size(); ++i)
+	size_t lastNewLine = 0;
+	for (size_t i = 0, lastSpace = 0; i<str.size(); ++i)
 	{
 		if (str[i]==' ') lastSpace = i;
 		else if (str[i]=='\n')
 		{
 			ret[currLine++] = str.substr(lastNewLine, i-lastNewLine-1);
 			lastNewLine = i + 1;
+			continue;
 		}
 		if (i-lastNewLine>=width)
 		{
@@ -35,5 +37,6 @@ vector<string> fitStringToWidth(string str, size_t width)
 			lastNewLine = lastSpace + 1;
 		}
 	}
+	ret[currLine] = str.substr(lastNewLine);
 	return ret;
 }

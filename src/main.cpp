@@ -90,7 +90,20 @@ void mainmenu()
 								currTopic++;
 								hasTestPending = 0;
 							}
-							currAvg = (currAvg+result)/2;
+
+							if (currAvg==0) currAvg = result;
+							else currAvg = (currAvg+result)/2;
+
+							if (currTopic==3)
+							{
+								hasTestPending = 1; // start endless test loop
+							}
+
+							if (currTopic==4)
+							{
+								--currTopic;
+								hasTestPending = 1; // endless tests after finishing all topics
+							}
 							updateInfo(username, currTopic, currAvg, hasHomeworkPending, hasTestPending);
 							term_getch();
 						}

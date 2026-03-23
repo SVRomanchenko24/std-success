@@ -1,5 +1,6 @@
 #include <cstdio>
 #include <string>
+#include <cstring>
 #include "../include/ui.h"
 #include "../include/test.h"
 #include "../include/task.h"
@@ -15,8 +16,13 @@ int test(string type, int size)
 	{
 		string task, solutions[4];
 		char buf[10];
+		int taskId;
 
-		int taskId = getRandomTaskIdAtLevel(currTopic);
+		if (currTopic==3) // endless test mode
+			taskId = RANDOM(0, 12);
+		else
+			taskId = getRandomTaskIdAtLevel(currTopic);
+
 
 		bool canBeDecimal = solutionCanBeDecimal(taskId);
 		double solution = (canBeDecimal?RANDOM_DECIMAL(-100, 100, 2):RANDOM(-100, 100));
@@ -31,22 +37,22 @@ int test(string type, int size)
 			{
 				case 8:
 				{
-					sprintf(buf, "(%g;%g)", ineq_min, ineq_max);
+					sprintf(buf, "(%.2g; %g)", ineq_min, ineq_max);
 					break;
 				}
 				case 9:
 				{
-					sprintf(buf, "(%g;%g]", ineq_min, ineq_max);
+					sprintf(buf, "(%.2g; %g]", ineq_min, ineq_max);
 					break;
 				}
 				case 10:
 				{
-					sprintf(buf, "(%g;+inf)", ineq_min);
+					sprintf(buf, "(%.2g; %.2g)", ineq_min, ineq_max);
 					break;
 				}
 				case 11:
 				{
-					sprintf(buf, "(%g;%g]", ineq_min, ineq_max);
+					sprintf(buf, "(%.2g;%.2g]", ineq_min, ineq_max);
 					break;
 				}
 			}
@@ -59,32 +65,37 @@ int test(string type, int size)
 		{
 			if (i==answerIndex) continue;
 			if (currTopic!=2) // not ineq
-				sprintf(buf, "%g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
+				sprintf(buf, "%.2g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
 			else
 			{
 				switch (taskId)
 				{
 					case 8:
 					{
-						sprintf(buf, "(%g;%g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.2g; %.2g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 9:
 					{
-						sprintf(buf, "(%g;%g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.2g; %.2g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 10:
 					{
-						sprintf(buf, "(%g;+inf)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2));
+						sprintf(buf, "(%.2g; %.2g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 11:
 					{
-						sprintf(buf, "(%g;%g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.2g; %.2g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 				}
+			}
+			if (!strcmp(solutions[answerIndex].c_str(), buf))
+			{
+				--i;
+				continue;
 			}
 			solutions[i] = buf;
 		}

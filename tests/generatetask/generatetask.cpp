@@ -1,11 +1,11 @@
 #include <cstdio>
 #include "../../include/task.h"
 
-int main(int argc, char **argv)
+int main()
 {
-	if (argc!=2) return 1;
-	if (*argv[1]==0) return 1;
-	int arg;
-	sscanf(argv[1], "%d", &arg);
-	printf("%s\n", generateTask(getRandomTaskIdAtLevel(arg), 10).c_str());
+	for (int i = 0; i<12; ++i)
+	{
+		printf("%s", generateTask(i, 10).c_str());
+		if (i>=8) printf(" ; min - %d, max - %d", ineq_min, ineq_max);
+	}
 }

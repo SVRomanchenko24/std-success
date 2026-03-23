@@ -35,7 +35,7 @@ int leaderboard()
 
     cout << "===== LEADERBOARD =====\n\n";
 
-    for (size_t i = 0; i < 10; i++) {
+    for (size_t i = 0; i < 10 && i < board.size(); i++) {
         cout << setw(2) << i + 1 << ". "
              << setw(15) << left << board[i].name
              << " | Avg: " << board[i].avg << endl;

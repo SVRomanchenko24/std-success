@@ -19,10 +19,11 @@ static task taskList[] = {
     { "Solve for x:\n@x + y = 2\nx - y = @", 1, 0 },
     { "Solve for y:\nx + @y = 5\n2x - 3y = @", 1, 0 },
     { "Solve for x:\n@x + 2y = 0\n3x - y = @", 1, 0 },
-    { "Which one is the solution for:\nx > 1 - @x\nx < @", 2, 1 },
-    { "Which one is the solution for:\nx > @ - 2x\n3x + 3<= @", 2, 1 },
-    { "Which one is the solution for:\n2x > @ - x\n@x > 8", 2, 1 },
-    { "Which one is the solution for:\n@x > 5\n3x <= @ + 2x", 2, 1 }
+	{ "Which one is the solution for:\nx > @(1 - 2x)\nx < @", 2, 1 },
+    { "Which one is the solution for:\nx > (2 - @)*x - 10\n3(x + 1) <= @", 2, 1 },
+    { "Which one is the solution for:\n@(x + 2) < 1\n@x > 8", 2, 1 },
+    { "Which one is the solution for:\n-x + @(x - 3) > 4\n3x <= @ + 2x", 2, 1 }
+
 };
 const int nTasks = 12;
 double ineq_max, ineq_min;
@@ -37,71 +38,78 @@ string generateTask(int taskId, double solution)
 
 	double *args = new double[nArgs];
 
+	args[0] = RANDOM(2, 10);
 	switch (taskId)
 	{
 		case 0:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = -(args[0]-2*solution);
 			break;
 		}
 		case 1:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = args[0]-solution;
 			break;
 		}
 		case 2:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = solution*3-args[0];
 			break;
 		}
 		case 3:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = 2*solution-(args[0]-solution);
 			break;
 		} // begin 1
 		case 4:
 		{
-			//	x: @x-y=1;x+y=@", 1, 0 },
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = solution+(args[0]*solution-1);
 			break;
 		}
 		case 5:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = solution+2-args[0]*solution;
 			break;
 		}
 		case 6:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = 2*(5-args[0]*solution)-3*solution;
 			break;
 		}
 		case 7:
 		{
-			args[0] = RANDOM_POSITIVE(0, 10);
 			args[1] = solution*(6+args[0])/2;
 			break;
-		}
+		} // begin 2
 		case 8:
 		{
+			args[1] = RANDOM(1, 10);
+			ineq_min = args[0]/(1+2*args[0]);
+			ineq_max = args[1];
 			break;
 		}
 		case 9:
 		{
+			args[0] = RANDOM(2, 10);
+			args[1] = RANDOM(1, 10);
+			ineq_min = -10/(1-2+args[0]);
+			ineq_max = args[1]/3-1;
 			break;
 		}
 		case 10:
 		{
+			args[0] = RANDOM(2, 10);
+			args[1] = RANDOM(2, 10);
+			ineq_min = 8/args[1];
+			ineq_max = (1-args[0]*2)/args[0];
 			break;
 		}
 		case 11:
 		{
+			args[0] = RANDOM(2, 10);
+			args[1] = RANDOM(1, 10);
+			ineq_min = (3*args[0]+4)/(args[0]-1);
+			ineq_max = args[1];
 			break;
 		}
 	}
@@ -112,7 +120,7 @@ string generateTask(int taskId, double solution)
 	{
 		i = output.find("@", i);
 		if (i==-1) break;
-		sprintf(buf, "%g", args[currArg]);
+		sprintf(buf, "%.2g", args[currArg]);
 		output.replace(i, 1, buf);
 	}
 
