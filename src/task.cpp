@@ -30,7 +30,6 @@ double ineq_max, ineq_min;
 
 string generateTask(int taskId, double solution)
 {
-	cout << taskId;
 	string output = taskList[taskId].task;
 
 	int nArgs = 0;
@@ -120,7 +119,7 @@ string generateTask(int taskId, double solution)
 	{
 		i = output.find("@", i);
 		if (i==-1) break;
-		sprintf(buf, "%.2g", args[currArg]);
+		sprintf(buf, "%.6g", args[currArg]);
 		output.replace(i, 1, buf);
 	}
 

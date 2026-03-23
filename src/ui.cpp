@@ -120,7 +120,7 @@ void term_getTermSize(short& x, short& y)
 	CONSOLE_SCREEN_BUFFER_INFO bufferInfo;
     GetConsoleScreenBufferInfo(GetStdHandle(STD_OUTPUT_HANDLE), &bufferInfo);
 	x = bufferInfo.srWindow.Right - bufferInfo.srWindow.Left + 1;
-	y = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top;
+	y = bufferInfo.srWindow.Bottom - bufferInfo.srWindow.Top + 1;
 }
 
 void term_setCursorVisibility(bool visible)

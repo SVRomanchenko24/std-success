@@ -37,22 +37,22 @@ int test(string type, int size)
 			{
 				case 8:
 				{
-					sprintf(buf, "(%.2g; %g)", ineq_min, ineq_max);
+					sprintf(buf, "(%.6g; %g)", ineq_min, ineq_max);
 					break;
 				}
 				case 9:
 				{
-					sprintf(buf, "(%.2g; %g]", ineq_min, ineq_max);
+					sprintf(buf, "(%.6g; %g]", ineq_min, ineq_max);
 					break;
 				}
 				case 10:
 				{
-					sprintf(buf, "(%.2g; %.2g)", ineq_min, ineq_max);
+					sprintf(buf, "(%.6g; %.6g)", ineq_min, ineq_max);
 					break;
 				}
 				case 11:
 				{
-					sprintf(buf, "(%.2g;%.2g]", ineq_min, ineq_max);
+					sprintf(buf, "(%.6g;%.6g]", ineq_min, ineq_max);
 					break;
 				}
 			}
@@ -65,29 +65,29 @@ int test(string type, int size)
 		{
 			if (i==answerIndex) continue;
 			if (currTopic!=2) // not ineq
-				sprintf(buf, "%.2g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
+				sprintf(buf, "%.6g", (canBeDecimal?RANDOM_DECIMAL(solution-4, solution+4, 2):RANDOM(solution-6, solution+6)));
 			else
 			{
 				switch (taskId)
 				{
 					case 8:
 					{
-						sprintf(buf, "(%.2g; %.2g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.6g; %.6g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 9:
 					{
-						sprintf(buf, "(%.2g; %.2g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.6g; %.6g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 10:
 					{
-						sprintf(buf, "(%.2g; %.2g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.6g; %.6g)", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 					case 11:
 					{
-						sprintf(buf, "(%.2g; %.2g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
+						sprintf(buf, "(%.6g; %.6g]", RANDOM_DECIMAL(ineq_min-4, ineq_min+4, 2), RANDOM_DECIMAL(ineq_max-4, ineq_max+4, 2));
 						break;
 					}
 				}

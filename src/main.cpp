@@ -185,10 +185,9 @@ int main(int argc, char **argv)
 			{
 				cout << "Your username can only contain letters and numbers.\nEnter your username: ";
 				cin >> userName;
-				cin.ignore(100);
 				cout << "Your password can only contain letters, numbers and special characters such as #, !. It also has to contain at least 6 charachers\nEnter your password: ";
 				char ch;
-				while ((ch = term_getch())!=KEY_ENTER&&password.size()<6)
+				while ((ch = term_getch())!=KEY_ENTER||password.size()<6)
 				{
 					if ((ch>='A'&&ch<='Z')||(ch>='a'&&ch<='z')||(ch>='0'&&ch<='9')||ch=='#'||ch=='!')
 						password.push_back(ch);

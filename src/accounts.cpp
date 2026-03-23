@@ -49,8 +49,8 @@ bool registerUser(string username, string password) {
 
     password = hash_sha256(password.c_str());
     outFile << password << "\n";
-    outFile << 1 << "\n";
     outFile << 0 << "\n";
+    outFile << 0.0 << "\n";
     outFile << false << "\n";
     outFile << false << "\n";
     outFile.close();
